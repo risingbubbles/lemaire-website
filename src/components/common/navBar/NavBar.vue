@@ -1,24 +1,36 @@
 <template>
   <div>
     <TopNavBar>L E M A I R E</TopNavBar>
-    <LeftNavBar :categories="['a','b']" :categoryList="{'a':[1,1,1],'b':[2,2,2]}"></LeftNavBar>
+    <LeftNavBar :categories="categories" :categoryList="categoryList"></LeftNavBar>
     <RightNavBar class="right-nav-bar">
-      <template v-slot:left>Fr</template>
+
+      <template v-slot:left>
+        <router-link to="/sign" tag="div">{{uName}}</router-link>
+      </template>
+
       <template v-slot:center>
         <div class="center-item">
-          <div>0</div>
+          <div>10</div>
           <img src="@/assets/img/navbar/cart.svg"/>
+          
         </div>
       </template>
-      <template v-slot:right><img src="@/assets/img/navbar/search.svg"/></template>
+
+      <template v-slot:right>
+        <img src="@/assets/img/navbar/search.svg"/>
+      </template>
+      
     </RightNavBar>
   </div>
 </template>
 
 <script>
+
+
 import TopNavBar from './childCompos/TopNavBar'
 import LeftNavBar from './childCompos/LeftNavBar'
 import RightNavBar from './childCompos/RightNavBar'
+
 
 export default {
   name:"NavBar",
@@ -26,13 +38,35 @@ export default {
     TopNavBar,
     LeftNavBar,
     RightNavBar
-  }
+  },
+  data(){
+    return{
+      categories:[],
+      categoryList:{},
+      uName:"Sign UP/Sign In"
+    }
+  },
+  props:{
+    categoriesAndChildList:{
+      type:Object,
+      default(){
+        return{}
+      }
+    },
+  },
+  mounted(){
+    this.categories=this.categoriesAndChildList.categories
+    this.categoryList=this.categoriesAndChildList.categoryList
+    // this.uName=this.$store.state.user.uName
+
+  },
+
 }
 </script>
 
 <style>
 .right-nav-bar{
-  width: 14%;
+  width: 16%;
   border: 1px solid red;
 }
 .right-nav-bar img{

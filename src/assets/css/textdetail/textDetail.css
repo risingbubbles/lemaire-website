@@ -1,0 +1,10 @@
+.margin{
+  margin: 140px;
+  margin-left: calc((100% * 0.73) / 2 - 54px);
+  margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.margin-top-140{
+  margin-top: 140px;
+}

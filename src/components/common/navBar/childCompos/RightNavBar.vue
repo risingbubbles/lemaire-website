@@ -1,8 +1,8 @@
 <template>
   <div class="right-nav-bar">
-    <div class="left"><slot name="left"></slot></div>
-    <div class="center"><slot name="center"></slot></div>
-    <div class="right"><slot name="right"></slot></div>
+    <a href=""><div class="left"><slot name="left"></slot></div></a>
+    <a href=""><div class="center"><slot name="center"></slot></div></a>
+    <a href=""><div class="right"><slot name="right"></slot></div></a>
   </div>
 </template>
 
@@ -29,7 +29,7 @@ export default {
 <style>
 .right-nav-bar{
   position: absolute;
-  margin: 8px;
+  margin: 22px;
   right: 0px;
   top: 0px;
   text-align: right;
@@ -43,9 +43,9 @@ export default {
 }
 .left{
   color: black;
-}
-.center{
+  font-size: 14px;
 }
 .right{
+
 }
 </style>

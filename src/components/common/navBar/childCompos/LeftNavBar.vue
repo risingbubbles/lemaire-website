@@ -1,9 +1,18 @@
 <template>
   <div class="left-nav-bar">
-    <div v-for="(category,index) in categories">
-      <span @mouseout="mouseOut(index)" @mouseover="mouseOver(index)">{{category}}</span>
-      <ul :class="{isShow:index===currentIndex}" class="ul">
-        <li v-for="item in categoryList[category]">{{item}}</li>
+    <div @mouseleave="mouseLeave(index)"  v-for="(category,index) in categories">
+      <label :for="index" @mouseover="mouseOver(index)">{{category}}</label>
+      <ul
+      :id="index"
+      :class="{isShow:index===currentIndex}"
+      class="ul">
+        <router-link
+          tag="li"
+          :to="{name:'category',params:{ category: item}}"
+          v-for="(item,i) in categoryList[category]">
+          <span>{{item}}</span>
+
+        </router-link>
       </ul>
     </div>
 
@@ -15,7 +24,7 @@ export default {
   name:'LeftNavBar',
   data(){
     return{
-      currentIndex:-1
+      currentIndex:-1,
     }
   },
   props:{
@@ -39,9 +48,11 @@ export default {
     mouseOver(index){
       this.currentIndex=index
     },
-    mouseOut(index){
+    mouseLeave(index){
       this.currentIndex=-1
-    }
+      // event.stopPropagation()
+    },
+    
   },
   computed:{
   }
@@ -59,11 +70,14 @@ export default {
 .left-nav-bar>*{
   border: 1px solid red;
   font-size: 13px;
-  margin-bottom: 9px;
+  margin-bottom:10px;
+  margin-top: 6px;
+  z-index: 9;
 }
-.left-nav-bar>div>span{
+.left-nav-bar>div>label{
   border: 1px solid forestgreen;
-
+  display: inline-block;
+  width: 80px;
 }
 .ul{
   list-style-type: none;
@@ -73,6 +87,7 @@ export default {
   margin-left: 0px;
 }
 .isShow{
-  display: block
+  display: block;
+  border: 1px solid yellow;
 }
 </style>
